@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login-user</login-user></title>
+  <style>
+    input {
+      display: block;
+    }
+    .container > div{
+      width: 40%;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container" style="display: flex;">
+    <div>
+      <h2>Log in to your account</h2>
+      <form action="/login-user" method="POST">
+        <input type="email" name="email" placeholder="write your email">
+        <input type="password" name="password" placeholder="write your password">
+        <button>login</button>
+      </form>
+    </div>
+    <div>
+      <h2>Create your account</h2>
+      <form action="/signup-user" method="POST">
+        <input type="text" name="userName" placeholder="Write your full Name">
+        <input type="email" name="email" placeholder="write your email">
+        <input type="password" name="password" placeholder="write your password">
+        <button>sign-up</button>
+      </form> 
+    </div>
+  </div>
+  <% if (err) { %>
+    <h5><%= err %></h5>
+   <% } %>
+</body>
