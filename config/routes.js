@@ -1,5 +1,6 @@
 const express = require('express');
 const placeController = require('../controller/placeController')
+const reviewController = require('../controller/reviewController')
 const route = express.Router();
 const userController = require('../controller/userController')
 const auth = require('../middleware/auth')
@@ -13,6 +14,8 @@ route.post('/places', placeController.addNewPlace)
 route.get('/places/:id/edit', placeController.editPage)
 route.post('/places/:id/edit', placeController.updatePlace)
 route.post('/places/:id/delete', placeController.deletePlace)
+route.post('/places/:id/reviews', reviewController.saveReview)
+route.post('/places/:id/reviews/:reviewid', reviewController.deleteReview)
 
 route.get('/', auth.userAuth, userController.mainPage)
 route.get('/login', auth.loginAuth,userController.logIn)
