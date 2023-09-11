@@ -7,8 +7,13 @@ const placeSchema = new Schema({
         type : String,
         enum : ['cafe', 'restaurant', 'playground' ]
     }, 
+    image: String,
     description : String,
-    location : String
+    location : String,
+    reviews:[{
+        type: Schema.Types.ObjectId,
+        ref : 'Review'
+    }]
 })
 
 const Place = mongoose.model('Place', placeSchema);

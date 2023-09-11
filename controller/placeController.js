@@ -1,5 +1,5 @@
 const Place = require('../models/placeModel')
-const placeController = require('../models/placeModel')
+
 
 const mainPage = async (req,res)=> {
     res.render('main')
@@ -11,6 +11,7 @@ const getPlaces = async (req,res) => {
 
 const showPage = async (req,res) => {
     const place = await Place.findById(req.params.id)
+    .populate('reviews')
     res.render('places/show', {place})
 }
 const newPage = (req,res) => {
