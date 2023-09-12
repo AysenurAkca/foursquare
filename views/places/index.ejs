@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<title>All Places</title>
 <h1>Places</h1>
 <div>
     <a href="/places/new">Add new Place</a>
@@ -16,6 +17,8 @@
                 <div class="card-text">
                     <h5><%= place.title %></h5>
                     <p><%= place.description %></p>
+                    <p>Author: <i><%= place.user.firstname %></i></p>
+                    
                     <a href="/places/<%= place._id %>" class="btn btn-primary">See more</a>
                 </div>
             </div>

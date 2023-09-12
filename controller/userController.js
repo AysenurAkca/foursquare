@@ -1,7 +1,7 @@
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 //const userController = require('../models/userModel')
-
+const jwt = require('jsonwebtoken')
 
 const mainPage = async (req,res)=> {
     res.render('main')
@@ -13,23 +13,30 @@ const logIn = (req, res) =>{
     })
   }
 
-  const createUser = (req, res) =>{
-    if (req.body.password !== "") {
-      let hashedPass = bcrypt.hashSync(req.body.password, 12);
-      let userObj ={
-        ...req.body,
-        password: hashedPass
+  const createUser =  async (req, res) =>{
+    const checkEmail = await User.findOne({email:req.body.email})
+    if(!checkEmail){
+      if (req.body.password !== "") {
+        let hashedPass = bcrypt.hashSync(req.body.password, 12);
+        let userObj ={
+          ...req.body,
+          password: hashedPass
+        }
+        let newUser = User(userObj)
+        newUser.save()
+        .then(() => {
+          res.render('login', {
+            err: "Now you can log in!"
+          })
+        }).catch((err) => {
+          console.log(err);
+        });
       }
-      console.log(userObj)
-      let newUser = User(userObj)
-      newUser.save()
-      .then(() => {
-        res.render('login', {
-          err: "You need create your account"
-        })
-      }).catch((err) => {
-        console.log(err);
-      });
+    }else{
+
+      res.render('login', {
+        err: "The email has already registered!"
+      })
     }
   }
 
@@ -39,10 +46,9 @@ const logIn = (req, res) =>{
       if (user !== null ) {
         let correctPass = bcrypt.compareSync(req.body.password, user.password);
           if (correctPass ) {
-            console.log(user)
-            res.cookie('userLoggedIn', 'true');
-            res.cookie('userInfo', user);
-            res.redirect('/');
+            const userToken = jwt.sign({user},"this is secret baby")
+                res.cookie('jwt', userToken)
+                res.redirect('/')
           } else{
             res.render('login',{
               err: 'Password is wrong!...Try again!'
@@ -50,7 +56,7 @@ const logIn = (req, res) =>{
       }
       } else {
         res.render('login',{
-          err: 'Invalid user or password, signup first'
+          err: 'Invalid user or password! Signup first!'
         })
       }
     })
@@ -60,8 +66,7 @@ const logIn = (req, res) =>{
   }
 
   const logOut = (req, res)=>{
-    res.clearCookie('userLoggedIn');
-    res.clearCookie('userInfo')
+    res.clearCookie('jwt');
     res.redirect('/login')
   }
 

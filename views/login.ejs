@@ -1,40 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login-user</login-user></title>
-  <style>
-    input {
-      display: block;
-    }
-    .container > div{
-      width: 40%;
-    }
-  </style>
-</head>
-<body>
+<% layout('layouts/boilerplate') %>
+<title>Log In</title>
   
-  <div class="container" style="display: flex;">
-    <div>
-      <h2>Log in to your account</h2>
-      <form action="/login-user" method="POST">
-        <input type="email" name="email" placeholder="write your email">
-        <input type="password" name="password" placeholder="write your password">
-        <button>login</button>
-      </form>
-    </div>
-    <div>
-      <h2>Create your account</h2>
-      <form action="/signup-user" method="POST">
-        <input type="text" name="userName" placeholder="Write your full Name">
-        <input type="email" name="email" placeholder="write your email">
-        <input type="password" name="password" placeholder="write your password">
-        <button>sign-up</button>
-      </form> 
-    </div>
+<div class="container">
+  <div class="row">
+      <div class="col-5 card p-3 me-3">
+        <h2>Log in to your account</h2>
+        <form action="/login-user" method="POST" novalidate class="validated-form">
+          <div class="mb-3">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="write your email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Email:</label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="write your password" required>
+          </div>
+          <button class="btn btn-success">Login</button>
+        </form>
+      </div>
+      <div class="col-5 card p-3 ms-3">
+        <h2>Create your account</h2>
+        <form action="/signup-user" method="POST" novalidate class="validated-form">
+          <div class="mb-3">
+            <label class="form-label" for="firstname">firstname:</label>
+            <input class="form-control" type="text" id="firstname" name="firstname" placeholder="Write your full Name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="write your email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password:</label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="write your password" required>
+          </div>
+          <button class="btn btn-success">Sign Up</button>
+        </form> 
+      </div>
+  </div>
+    
+    
   </div>
   <% if (err) { %>
     <h5><%= err %></h5>
-   <% } %>
-</body>
+  <% } %>
+</div>

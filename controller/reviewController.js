@@ -3,8 +3,11 @@ const Place = require('../models/placeModel')
 
 const saveReview = async (req,res) => {
     const {id} = req.params;
-    const review = new Review(req.body)
-    const savedReview = await review.save()
+    const review = new Review({
+        ...req.body,
+        user: res.locals.id
+    })
+    const savedReview = (await review.save()).populate('user')
     const place = await Place.findById(id)
     place.reviews.push(review)
     await place.save()
