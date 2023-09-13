@@ -26,7 +26,7 @@ const logIn = (req, res) =>{
         newUser.save()
         .then(() => {
           res.render('login', {
-            err: "Now you can log in!"
+            err: ""
           })
         }).catch((err) => {
           console.log(err);
@@ -34,8 +34,8 @@ const logIn = (req, res) =>{
       }
     }else{
 
-      res.render('login', {
-        err: "The email has already registered!"
+      res.render('signup', {
+        err: "The email has already registered! Try again!"
       })
     }
   }
@@ -69,6 +69,10 @@ const logIn = (req, res) =>{
     res.clearCookie('jwt');
     res.redirect('/login')
   }
+const signUpPage = (req,res) =>{
+  res.render('signup', {
+    err:""
+  })
+}
 
-
-module.exports = {mainPage,logIn,createUser,logInUser,logOut}
+module.exports = {mainPage,logIn,createUser,logInUser,logOut,signUpPage}

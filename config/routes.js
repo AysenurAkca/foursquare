@@ -14,14 +14,14 @@ route.get('/places/:id/edit',auth.checkUser, placeController.editPage)
 route.post('/places/:id/edit', placeController.updatePlace)
 route.post('/places/:id/delete', placeController.deletePlace)
 route.post('/places/:id/reviews',auth.userAuth, reviewController.saveReview)
-route.post('/places/:id/reviews/:reviewid', reviewController.deleteReview)
+route.post('/places/:id/reviews/:reviewid',auth.checkUserforReview, reviewController.deleteReview)
 
 
 route.get('/login', auth.loginAuth,userController.logIn)
 route.post('/signup-user', userController.createUser)
 route.post('/login-user', userController.logInUser)
 route.get('/logout-user', userController.logOut)
-
+route.get('/signup',auth.loginAuth, userController.signUpPage)
 
  
 module.exports = route;

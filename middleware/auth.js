@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const Place = require('../models/placeModel')
+const Review = require('../models/reviewModel')
 const userAuth = (req,res,next) => {
     if(req.cookies.jwt){
         jwt.verify(req.cookies.jwt,"this is secret baby", function(err,decodedUser){
@@ -27,9 +28,34 @@ const checkUser = (req,res,next)=> {
                 Place.findById(req.params.id).populate('user') 
                 .then((place)=> {
                     
-                    console.log(place.user.id);
-                    console.log(decodedUser.user._id);
                     if(place.user.id == decodedUser.user._id){
+                        next()
+                    }else{
+                        res.redirect(`/places/${req.params.id}`)
+                    }
+                })
+                
+                
+            }
+        } )
+    }
+    else{
+        res.redirect('/login')
+    }
+}
+
+const checkUserforReview = (req,res,next)=> {
+    if(req.cookies.jwt){
+        jwt.verify(req.cookies.jwt,"this is secret baby", function(err,decodedUser){
+            if(err){
+                console.log('There is an issue with jwt');
+            } else {
+                Review.findById(req.params.reviewid).populate('user') 
+                .then((review)=> {
+                    
+                    console.log(review.user.id);
+                    console.log(decodedUser.user._id);
+                    if(review.user.id == decodedUser.user._id){
                         console.log('yes');
                         next()
                     }else{
@@ -47,6 +73,7 @@ const checkUser = (req,res,next)=> {
     }
 }
 
+
 const loginAuth = (req,res,next) => {
     if(req.cookies.jwt){
         res.redirect('/')
@@ -55,4 +82,4 @@ const loginAuth = (req,res,next) => {
     }
 }
 
-module.exports = {userAuth,loginAuth,checkUser}
+module.exports = {userAuth,loginAuth,checkUser,checkUserforReview}

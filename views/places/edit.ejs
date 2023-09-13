@@ -9,7 +9,7 @@
         <form action="/places/<%= place._id %>/edit" method="POST" novalidate class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title">Title:</label>
-                <input class="form-control" type="text" name="title" id="title" placeholder="title" value="<%= place.title %>" required>
+                <input class="form-control" type="text" name="title" id="title" placeholder="Title" value="<%= place.title %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
@@ -24,14 +24,14 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description:</label>
-                <textarea class="form-control" type="text" name="description" id="description" placeholder="description" required><%= place.description %></textarea>
+                <textarea class="form-control" type="text" name="Description" id="description" placeholder="description" required><%= place.description %></textarea>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="location">Location:</label>
-                <input class="form-control" type="text" name="location" id="location" placeholder="location" value="<%= place.location %>" required>
+                <input class="form-control" type="text" name="location" id="location" placeholder="Location" value="<%= place.location %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
