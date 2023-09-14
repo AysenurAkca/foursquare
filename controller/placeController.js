@@ -42,7 +42,7 @@ const editPage = async (req,res) => {
     res.render('places/edit', {place})
 }
 const updatePlace = async (req,res)=> {
-    const place = await Place.findByIdAndUpdate(req.params.id, req.body)
+    await Place.findByIdAndUpdate(req.params.id, req.body)
     res.redirect(`/places/${req.params.id}`)
 }
 

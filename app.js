@@ -3,7 +3,7 @@ const route = require('./config/routes')
 const app = express()
 const ejsMate = require('ejs-mate')
 require('./config/mongoose')
-
+require('dotenv').config()
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended:true}))

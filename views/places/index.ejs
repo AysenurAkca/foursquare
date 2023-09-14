@@ -1,23 +1,21 @@
 <% layout('layouts/boilerplate') %>
 <title>All Places</title>
 <h1>Places</h1>
-<div>
-    <a href="/places/new">Add new Place</a>
-</div>
+
 
 <% for(let place of places){ %>
     <div class="card">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5 me-3">
                 <div class="card-img">
                     <img class="img-fluid" src="<%= place.image %>" >
                 </div>
             </div>
-            <div class="col-md-8 p-3">
+            <div class="col-md-6 p-3">
                 <div class="card-text">
                     <h5><%= place.title %></h5>
-                    <p><%= place.description %></p>
-                    <p>Author: <i><%= place.user.firstname %></i></p>
+                    <p><%= place.description.slice(0,125) %><span>...</span></p>
+                    <p>Author: <i><%= place.user.firstname.toUpperCase() %></i></p>
                     
                     <a href="/places/<%= place._id %>" class="btn btn-primary">See more</a>
                 </div>

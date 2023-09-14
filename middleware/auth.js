@@ -53,13 +53,9 @@ const checkUserforReview = (req,res,next)=> {
                 Review.findById(req.params.reviewid).populate('user') 
                 .then((review)=> {
                     
-                    console.log(review.user.id);
-                    console.log(decodedUser.user._id);
                     if(review.user.id == decodedUser.user._id){
-                        console.log('yes');
                         next()
                     }else{
-                        console.log('no');
                         res.redirect(`/places/${req.params.id}`)
                     }
                 })

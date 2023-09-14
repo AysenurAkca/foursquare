@@ -48,7 +48,7 @@ const logIn = (req, res) =>{
           if (correctPass ) {
             const userToken = jwt.sign({user},"this is secret baby")
                 res.cookie('jwt', userToken)
-                res.redirect('/')
+                res.redirect('/places')
           } else{
             res.render('login',{
               err: 'Password is wrong!...Try again!'
