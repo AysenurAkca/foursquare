@@ -4,7 +4,10 @@ const Review = require('./reviewModel')
 
 
 const placeSchema = new Schema({
-    title:String,
+    title:{
+        type: String,
+
+    },
     kind:{
         type : String,
         enum : ['cafe', 'restaurant', 'playground' ]
@@ -21,7 +24,10 @@ const placeSchema = new Schema({
             return moment(createAt).format('MMMM Do YYYY')
         }
     },
-    description : String,
+    description : {
+        type : String,
+        
+    },
     location : String,
     reviews:[{
         type: Schema.Types.ObjectId,

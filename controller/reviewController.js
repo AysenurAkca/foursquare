@@ -11,8 +11,8 @@ const saveReview = async (req,res) => {
     const place = await Place.findById(id)
     place.reviews.push(review)
     await place.save()
-    res.redirect(`/places/${id}`)
-}
+    res.redirect(`/places/${id}`)}
+
 
 const deleteReview = async (req,res) => {
     const {id, reviewid} = req.params

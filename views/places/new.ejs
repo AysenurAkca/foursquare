@@ -4,7 +4,9 @@
     <h1 class="text-center">
         New Place
     </h1>
+    
     <div class="col-6 offset-3">
+        <div class="text-danger"><%= err %></div>
         <form action="/places" method="POST" novalidate class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title">Title:</label>

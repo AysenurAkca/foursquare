@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const Place = require('../models/placeModel')
 const Review = require('../models/reviewModel')
+const Joi = require('joi');
+const AppError = require('../AppError');
 const userAuth = (req,res,next) => {
     if(req.cookies.jwt){
         jwt.verify(req.cookies.jwt,"this is secret baby", function(err,decodedUser){
@@ -78,4 +80,47 @@ const loginAuth = (req,res,next) => {
     }
 }
 
-module.exports = {userAuth,loginAuth,checkUser,checkUserforReview}
+const validatePlace = (req,res,next)=> {
+    const placeJoiSchema = Joi.object({
+        title: Joi.string()
+            .alphanum()
+            .min(2)
+            .max(30)
+            .required(),
+        kind: Joi.string().required(),
+        user: Joi.string(),
+        image: Joi.string().required(),
+        location: Joi.string().required(),
+        description: Joi.string().min(2).max(500).required(),
+    })
+    const result = placeJoiSchema.validate(req.body);
+    if(result.error){
+        res.render('places/new', {err: `${result.error.details[0].message}`})
+    }else {
+        next()
+    }
+    
+}
+
+// const validateReview = async (req,res,next)=> {
+//     const reviewJoiSchema = Joi.object({
+//         review: Joi.string()
+//             .max(5)
+//             .required(),
+//         rating : Joi.number().required(),
+//         user : Joi.string()
+//     })
+//     const result = reviewJoiSchema.validate(req.body);
+//     if(result.error){
+//         const {id} = req.params;
+//         console.log(id);
+//         const place = await Place.findById(req.params.id)
+//         res.render('places/show', {place, err: `${result.error.details[0].message}`})
+//     }else {
+//         next()
+//     }
+    
+// }
+
+
+module.exports = {userAuth,loginAuth,checkUser,checkUserforReview, validatePlace}
