@@ -3,15 +3,22 @@ const Place = require('../models/placeModel')
 
 const saveReview = async (req,res) => {
     const {id} = req.params;
-    const review = new Review({
-        ...req.body,
-        user: res.locals.id
-    })
+    const review = new Review(req.body)
     const savedReview = (await review.save()).populate('user')
     const place = await Place.findById(id)
     place.reviews.push(review)
     await place.save()
-    res.redirect(`/places/${id}`)}
+    // res.redirect(`/places/${id}`)
+    res.status(200).send('Review saved')
+}
+
+const getReviews = async (req,res) => {
+    const reviews = await Review.find()
+    .populate('user')
+    .sort({created_at : "-1"})
+    res.send(reviews)
+    
+}
 
 
 const deleteReview = async (req,res) => {
@@ -20,4 +27,4 @@ const deleteReview = async (req,res) => {
     await Review.findByIdAndDelete(reviewid)
     res.redirect(`/places/${id}`)
 }
-module.exports = {saveReview,deleteReview}
+module.exports = {saveReview,deleteReview,getReviews}

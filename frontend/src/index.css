@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.App{
+  width: 80%;
+  margin: 20px auto;
+}
+
+.onePlace{
+  display: flex;
+  margin-top: 20px;
+  border: 1px solid grey;
+  border-radius: 15px;
+  gap: 25px;
+ 
+}
+img{
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+.placeImg{
+  width: 50%;
+}
+.placeText{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Detail{
+  display: flex;
+  gap: 25px;
+}
+
+.delUpdateBtns{
+  display: flex;
+  justify-content: space-between;
+}
+
+.Detail button{
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.Detail button:hover{
+  color: antiquewhite;
+  box-shadow: 2px 1px 1px black;
+}
+
+.delBtn{
+  background-color: red;
+  color: white;
+}
+
+.UpdateBtn{
+  background-color: green;
+  color: white;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 50%;
+  margin: 20px auto;
+}
+.halfcenter{
+  width: 50%;
+  margin: 20px auto;
+}
+
+.Header{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 150px;
+  background-color: rgb(209, 77, 77);
+  height: 50px;
+}
+
+.link{
+  text-decoration: none;
+  color: white;
+  font-size: 1.5em;
+}
+
+.link:hover{
+  font-weight: 500;
+  }
+
+.Login{
+  margin-top: 50px;
+}
+
+.rating{
+  margin-bottom: 15px;
+}
+.oneReview{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+}
