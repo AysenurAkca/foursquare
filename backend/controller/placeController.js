@@ -14,7 +14,9 @@ const getPlaces = async (req,res) => {
     .populate('reviews')
     .populate('user')
     .sort({created_at : "-1"})
-    res.render('places/index', {places})
+    
+    res.send(places)
+    
 }
 
 const showPage = async (req,res) => {
@@ -29,20 +31,18 @@ const showPage = async (req,res) => {
             model: 'User'
         }
         })
-    res.render('places/show', {place, err:''})
+    // res.render('places/show', {place, err:''})
+    console.log(place);
+    res.send(place)
+   
 }
 const newPage = (req,res) => {
     res.render('places/new', {err:''})
 }
-
 const addNewPlace = wrapAsync(async (req,res,next)=> {
-        const place = new Place({
-            ...req.body,
-            user : res.locals.id
-        })
+        const place = new Place(req.body)
         await place.save()
-        res.redirect(`/places/${place._id}`)
-    
+        res.send(place)
 })
 
 const editPage = wrapAsync(async (req,res,next) => { 

@@ -4,21 +4,27 @@ const Review = require('../models/reviewModel')
 const Joi = require('joi');
 const AppError = require('../AppError');
 const userAuth = (req,res,next) => {
-    if(req.cookies.jwt){
-        jwt.verify(req.cookies.jwt,"this is secret baby", function(err,decodedUser){
-            if(err){
-                console.log('There is an issue with jwt');
-            } else {
-                res.locals.firstname = decodedUser.user.firstname;
-                res.locals.id = decodedUser.user._id;
-                res.locals.user = decodedUser.user
-            }
-        } )
-        next()
+    
+    if(req.headers.token){
+        next();
+    } else {
+        res.status(400).send('Auth is required')
     }
-    else{
-        res.redirect('/login')
-    }
+    // if(req.cookies.jwt){
+    //     jwt.verify(req.cookies.jwt,"this is secret baby", function(err,decodedUser){
+    //         if(err){
+    //             console.log('There is an issue with jwt');
+    //         } else {
+    //             res.locals.firstname = decodedUser.user.firstname;
+    //             res.locals.id = decodedUser.user._id;
+    //             res.locals.user = decodedUser.user
+    //         }
+    //     } )
+    //     next()
+    // }
+    // else{
+    //     res.redirect('/login')
+    // }
 }
 
 const checkUser = (req,res,next)=> {

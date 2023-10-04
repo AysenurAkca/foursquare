@@ -25,18 +25,13 @@ const logIn = (req, res) =>{
         let newUser = User(userObj)
         newUser.save()
         .then(() => {
-          res.render('login', {
-            err: ""
-          })
+          res.send()
         }).catch((err) => {
           console.log(err);
         });
       }
     }else{
-
-      res.render('signup', {
-        err: "The email has already registered! Try again!"
-      })
+      res.send("exist")
     }
   }
 
@@ -47,17 +42,21 @@ const logIn = (req, res) =>{
         let correctPass = bcrypt.compareSync(req.body.password, user.password);
           if (correctPass ) {
             const userToken = jwt.sign({user},"this is secret baby")
-                res.cookie('jwt', userToken)
-                res.redirect('/places')
+                // res.send( userToken)
+              let userData = {
+                id: user._id,
+                email: user.email,
+                firstname: user.firstname
+              }
+              res.send({userToken, userData})
           } else{
-            res.render('login',{
-              err: 'Password is wrong!...Try again!'
-          })
+          //   res.render('login',{
+          //     err: 'Password is wrong!...Try again!'
+          // })
+          res.status(404).send("Password is not correct")
       }
       } else {
-        res.render('login',{
-          err: 'Invalid user or password! Signup first!'
-        })
+        res.status(404).send("Email is not correct")
       }
     })
     .catch((err) => {
