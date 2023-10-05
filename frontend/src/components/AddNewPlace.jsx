@@ -17,6 +17,9 @@ export default function AddNewPlace() {
     const [location, setLocation] = useState('')
     const {register , handleSubmit , formState:{errors}} = useForm()
     let userData=JSON.parse(localStorage.getItem("userData"))
+
+   
+
     const addNew =()=>{
         axios.post('http://localhost:4000/places',{
             title : title,
@@ -26,10 +29,18 @@ export default function AddNewPlace() {
             location : location,
             user: userData.id
         }).then((response) => {
+          console.log(response.data);
             window.location.href='/places'
-          });
+          }).catch(err=>console.log(err))
      }
-        
+
+     //from internet to solve the error
+  //    axios.interceptors.response.use(function (response) {
+  //     throw new axios.Cancel('Operation canceled by the user.');
+  //   }, function (error) {
+  //     return Promise.reject(error);
+  // });
+
   return (
     <div>
         <h1 className='halfcenter'>Add New Place</h1>
@@ -55,7 +66,7 @@ export default function AddNewPlace() {
           label="Kind"
           onChange={e=>setKind(e.target.value)}
         >
-          <MenuItem value={'Cafe'}>Cafe</MenuItem>
+          <MenuItem value={'cafe'}>Cafe</MenuItem>
           <MenuItem value={'restaurant'}>Restaurant</MenuItem>
           <MenuItem value={'playground'}>Playground</MenuItem>
         </Select>

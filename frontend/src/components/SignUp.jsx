@@ -17,6 +17,7 @@ export default function SignUp() {
         password : password
       }).then((response) => {
         window.location.href='/login'
+        
       });
     }
   return (
@@ -51,11 +52,11 @@ export default function SignUp() {
           required
           id="outlined-required"
           label="Password"
-          {...register('password', {required:'This field is must be filled', minLength:{value:4, message:'Password should be at least 8 characters'}})}
+          {...register('password', {required:'This field is must be filled', minLength:{value:6, message:'Password should be at least 6 characters'}})}
           type="password"
           onChange={e=>setPassword(e.target.value)}
           value={password}
-          placeholder="Title"
+          placeholder="Password"
         />
         {errors.password && <span style={{color:"red"}}>{errors.password.message}</span>}
         <Button variant="contained" onClick={handleSubmit(signup)}>Signup</Button>

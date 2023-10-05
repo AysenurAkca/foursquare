@@ -31,7 +31,7 @@ const logIn = (req, res) =>{
         });
       }
     }else{
-      res.send("exist")
+      res.send("User created")
     }
   }
 

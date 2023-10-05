@@ -45,7 +45,9 @@ img{
   flex-direction: column;
   gap: 10px;
 }
-
+.placeText p{
+  margin-top: 0;
+}
 .Detail{
   display: flex;
   gap: 25px;
