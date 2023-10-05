@@ -34,6 +34,8 @@ const placeSchema = new Schema({
         ref : 'Review'
     }]
 })
+
+
 placeSchema.post('findOneAndDelete', async (doc)=> {
     if(doc){
         await Review.deleteMany({

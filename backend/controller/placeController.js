@@ -14,7 +14,6 @@ const getPlaces = async (req,res) => {
     .populate('reviews')
     .populate('user')
     .sort({created_at : "-1"})
-    
     res.send(places)
     
 }
@@ -31,8 +30,6 @@ const showPage = async (req,res) => {
             model: 'User'
         }
         })
-    // res.render('places/show', {place, err:''})
-    console.log(place);
     res.send(place)
    
 }
@@ -47,17 +44,24 @@ const addNewPlace = wrapAsync(async (req,res,next)=> {
 
 const editPage = wrapAsync(async (req,res,next) => { 
     const place = await Place.findById(req.params.id)
-    res.render('places/edit', {place})
+    res.status(200).send(place)
 })
 
 const updatePlace = async (req,res)=> {
-    await Place.findByIdAndUpdate(req.params.id, req.body)
-    res.redirect(`/places/${req.params.id}`)
+    const place =await Place.findByIdAndUpdate(req.params.id, req.body)
+    res.status(200).send(place)
 }
 
-const deletePlace = async (req,res) => {
-    await Place.findByIdAndDelete(req.params.id)
-    res.redirect('/places')
+const deletePlace =async (req,res) => {
+    const {id} = req.params
+
+    try{
+        await Place.findByIdAndDelete(id);
+        return res.status(200).json({ success: true, msg: 'Product Deleted' });
+    }
+    catch(err){
+        console.error(err);
+    }
 }
 
 module.exports = {getPlaces,showPage,newPage,addNewPlace,editPage,updatePlace,deletePlace}

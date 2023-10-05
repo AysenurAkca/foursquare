@@ -32,6 +32,12 @@ img{
 }
 .placeImg{
   width: 50%;
+ 
+}
+.detailImg{
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 10px;
 }
 .placeText{
   width: 50%;
@@ -43,6 +49,7 @@ img{
 .Detail{
   display: flex;
   gap: 25px;
+  
 }
 
 .delUpdateBtns{
@@ -65,11 +72,29 @@ img{
   color: white;
 }
 
-.UpdateBtn{
+.updateBtn{
   background-color: green;
   color: white;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid black;
 }
-
+.updateBtn:hover{
+  color: antiquewhite;
+  box-shadow: 2px 1px 1px black;
+}
+.seeMore{
+  background-color: rgb(0, 23, 128);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid black;
+  width: 18%;
+}
 form{
   display: flex;
   flex-direction: column;

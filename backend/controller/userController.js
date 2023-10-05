@@ -50,9 +50,6 @@ const logIn = (req, res) =>{
               }
               res.send({userToken, userData})
           } else{
-          //   res.render('login',{
-          //     err: 'Password is wrong!...Try again!'
-          // })
           res.status(404).send("Password is not correct")
       }
       } else {

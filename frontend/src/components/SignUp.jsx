@@ -16,7 +16,7 @@ export default function SignUp() {
         email : email,
         password : password
       }).then((response) => {
-        console.log(response);
+        window.location.href='/login'
       });
     }
   return (

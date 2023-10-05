@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
@@ -6,33 +6,55 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import axios from 'axios';
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom';
 
 
 
-export default function AddNewPlace() {
+export default function UpdatePlace(props) {
     const [title, setTitle] = useState('')
     const [kind, setKind] = useState('')
     const [description, setDescription] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [location, setLocation] = useState('')
+    const [place, setPlace] = useState()
     const {register , handleSubmit , formState:{errors}} = useForm()
     let userData=JSON.parse(localStorage.getItem("userData"))
-    const addNew =()=>{
-        axios.post('http://localhost:4000/places',{
-            title : title,
-            kind : kind,
-            description : description,
-            image: imageUrl,
-            location : location,
-            user: userData.id
-        }).then((response) => {
+    const {id} = useParams()
+    useEffect(()=>{
+      console.log(id);
+      axios.get(`http://localhost:4000/places/${id}`, {
+        headers: {
+          token: localStorage.getItem("userToken")
+        }
+      })
+      .then(res=>{
+        setPlace(res.data)
+        setTitle(res.data.title)
+        setKind(res.data.kind)
+        setDescription(res.data.description)
+        setImageUrl(res.data.image)
+        setLocation(res.data.location)
+        console.log(place);
+      })
+
+      .catch(err=> console.log(err))
+    },[])
+
+    const updatePlace = async(id)=>{
+        axios.put(`http://localhost:4000/places/${place._id}/edit`, {
+          title, kind,description,image:imageUrl,location
+        })
+          .then((response) => {
+            console.log(response.data);
             window.location.href='/places'
-          });
-     }
-        
+          })
+          .catch((error) => {
+            console.error(error);
+      });
+    }
   return (
     <div>
-        <h1 className='halfcenter'>Add New Place</h1>
+        <h1 className='halfcenter'>Update Place</h1>
         <form>
         <TextField
           required
@@ -95,8 +117,9 @@ export default function AddNewPlace() {
           placeholder="Image Url"
         />
         {errors.image && <span style={{color:"red"}}>{errors.image.message}</span>}
-         <Button variant="contained" onClick={handleSubmit(addNew)}>Add New Place</Button>
+         <Button variant="contained" onClick={handleSubmit(updatePlace)}>Update Place</Button>
         </form>
+       
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom'
 
 export default function Places() {
     const [places,setPlaces] = useState([])
-
+    
     useEffect(()=>{
         axios.get('http://localhost:4000/get-places',{
           headers: {
@@ -26,8 +26,8 @@ export default function Places() {
           <div className='placeText'>
             <h2>{place.title}</h2>
             <p>{place.description}</p>
-            {/* <p>Author: {place.user.firstname}</p> */}
-            <Link to={`/places/${place._id}`}>See More</Link>
+            <p>Author: {place.user.firstname}</p>
+            <Link to={`/places/${place._id}`} className='seeMore'>See More</Link>
           </div>
         </div>
       )

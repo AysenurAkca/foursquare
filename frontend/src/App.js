@@ -9,6 +9,7 @@ import Header from './components/Header';
 import AddNewPlace from './components/AddNewPlace';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import UpdatePlace from './components/UpdatePlace';
 
 function App() {
  let userToken= localStorage.getItem("userToken")
@@ -26,6 +27,7 @@ function App() {
               <Route path='/places' element={<Places/>}/>
               <Route path='/places/:id' element={<Detail/>}/>  
               <Route path='/places/new' element={<AddNewPlace/>}/>
+              <Route path='/places/:id/edit' element={<UpdatePlace/>}/>
             </> : 
               <>
               <Route path='/login' element={<Login/>}/> 

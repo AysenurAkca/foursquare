@@ -20,14 +20,11 @@ export default function Login() {
             localStorage.setItem("userData", JSON.stringify(res.data.userData))
             localStorage.setItem("userToken", res.data.userToken)
             window.location.href="/"
-            
-          }
-         
-        }).catch(err=>console.log(err.response.data))
-        
-        
+          }  
+        }).catch(err=>alert(err.response.data))
         setEmail('')
         setPassword('')
+        
     }
     useEffect(()=>{
       let userToken = localStorage.getItem("userToken")
@@ -60,7 +57,7 @@ export default function Login() {
           id="outlined-required"
           label="Password"
           type="password"
-          {...register('password', {required:'This field is must be filled', minLength:{value:4, message:'Password should be at least 8 characters'}})}
+          {...register('password', {required:'This field is must be filled', minLength:{value:6, message:'Password should be at least 6 characters'}})}
           onChange={e=>setPassword(e.target.value)}
           value={password}
           placeholder="Password"

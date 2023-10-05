@@ -10,21 +10,6 @@ const userAuth = (req,res,next) => {
     } else {
         res.status(400).send('Auth is required')
     }
-    // if(req.cookies.jwt){
-    //     jwt.verify(req.cookies.jwt,"this is secret baby", function(err,decodedUser){
-    //         if(err){
-    //             console.log('There is an issue with jwt');
-    //         } else {
-    //             res.locals.firstname = decodedUser.user.firstname;
-    //             res.locals.id = decodedUser.user._id;
-    //             res.locals.user = decodedUser.user
-    //         }
-    //     } )
-    //     next()
-    // }
-    // else{
-    //     res.redirect('/login')
-    // }
 }
 
 const checkUser = (req,res,next)=> {
