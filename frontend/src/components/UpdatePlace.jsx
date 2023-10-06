@@ -77,7 +77,7 @@ export default function UpdatePlace(props) {
           label="Kind"
           onChange={e=>setKind(e.target.value)}
         >
-          <MenuItem value={'Cafe'}>Cafe</MenuItem>
+          <MenuItem value={'cafe'}>Cafe</MenuItem>
           <MenuItem value={'restaurant'}>Restaurant</MenuItem>
           <MenuItem value={'playground'}>Playground</MenuItem>
         </Select>

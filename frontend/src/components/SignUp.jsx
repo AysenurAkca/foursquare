@@ -18,7 +18,7 @@ export default function SignUp() {
       }).then((response) => {
         window.location.href='/login'
         
-      });
+      }).catch(err=> alert(err.response.data))
     }
   return (
     <div>

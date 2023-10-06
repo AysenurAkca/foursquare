@@ -96,6 +96,7 @@ img{
   text-decoration: none;
   border: 1px solid black;
   width: 18%;
+  text-align: center;
 }
 form{
   display: flex;
@@ -124,6 +125,10 @@ form{
   font-size: 1.5em;
 }
 
+.logout{
+  margin-left: auto;
+}
+
 .link:hover{
   font-weight: 500;
   }
@@ -140,4 +145,13 @@ form{
   border-radius: 10px;
   padding: 5px 10px;
   margin-bottom: 5px;
+}
+
+.notFoundLink{
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 4px 8px;
+  background-color: rgb(122, 71, 171);
+  color: white;
+  border-radius: 5px;
 }

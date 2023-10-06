@@ -25,13 +25,13 @@ const logIn = (req, res) =>{
         let newUser = User(userObj)
         newUser.save()
         .then(() => {
-          res.send()
+          res.send("User created")
         }).catch((err) => {
           console.log(err);
         });
       }
     }else{
-      res.send("User created")
+      res.status(400).send("Email is already exist")
     }
   }
 

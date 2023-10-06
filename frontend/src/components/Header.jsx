@@ -15,7 +15,7 @@ export default function Header() {
         <Link to={'/'} className='link'>Home</Link>
         <Link to={'/places'} className='link'>Places</Link>
         <Link to={'/places/new'} className='link'> New Place</Link>
-          <Link onClick={logOut} className='link'> Log out</Link>
+          <Link onClick={logOut} className='link logout'> Log out</Link>
           </>
           :
           <>
